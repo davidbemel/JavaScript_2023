@@ -1,0 +1,399 @@
+// final Store the Shipments Billed Weight Into Variable
+var ourBilledWeight = request.BilledWeight;
+
+
+// If Non-Intra US Shipment And Weight Unit is L, then Convert to KG
+if ((request.OrgCountry != 'US' || request.DestCountry != 'US') 
+    && request.WeightUnit == 'L')
+{
+  ourBilledWeight = request.BilledWeight / 2.205;
+}
+
+// If Origin/Destination = China, It Should Rate At Zero
+if (request.OrgCountry == 'CN' && request.DestCountry == 'CN') 
+{0;}
+
+
+if (request.IsShipDateAfter('2022-04-11'))
+{
+
+
+
+//From Apr 11th, 2022
+
+if (["KR", "PH", "VN", "TW"].includes(request.OrgCountry)
+&& ["AR", "BO", "BR", "CL", "CO", "EC", "GF", "GY", "KN", 
+	"LC", "PE", "PY", "SR", "UY", "VE", "BZ", "CR", "GT", "HN", "NI", "PA", 
+    "SV", "AG", "AL", "AN", "AW", "BB", "BM", "BS", "DM", "DO", "GD", "GP", 
+    "HT", "JM", "KY", "MQ", "MS", "TC", "TT", "VC", "VG", "VI", 
+	"AS", "CK", "GU", "KH", "TL", "FJ", "PF", "LA", "MH", "FM", "MN", "NC", "PW",
+    "PG", "MP", "WS", "TO", "VU", "WF"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 2.00;
+}
+
+else if (["JP"].includes(request.OrgCountry)
+&& ["AR", "BO", "BR", "CL", "CO", "EC", "GF", "GY", "KN", 
+	"LC", "PE", "PY", "SR", "UY", "VE", "BZ", "CR", "GT", "HN", "NI", "PA", 
+	"SV", "AG", "AL", "AN", "AW", "BB", "BM", "BS", "DM", "DO", "GD", "GP", 
+	"HT", "JM", "KY", "MQ", "MS", "TC", "TT", "VC", "VG", "VI"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 2.00;
+}
+
+else if (["SG"].includes(request.OrgCountry)
+&& ["AR", "BO", "BR", "CL", "CO", "EC", "GF", "GY", "KN", 
+	"LC", "PE", "PY", "SR", "UY", "VE", "BZ", "CR", "GT", "HN", "NI", "PA", 
+	"SV", "AG", "AL", "AN", "AW", "BB", "BM", "BS", "DM", "DO", "GD", "GP", 
+	"HT", "JM", "KY", "MQ", "MS", "TC", "TT", "VC", "VG", 
+	"AF", "IQ", "JO", "LB", "SY", "YE", "CN",
+	"AS", "CK", "GU", "KH", "TL", "FJ", "PF", "LA", "MH", "FM", "MN", "NC", "PW",
+    "PG", "MP", "WS", "TO", "VU", "WF", "PS"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 2.00;
+}
+
+else if (["HK"].includes(request.OrgCountry)
+&& ["AR", "BO", "BR", "CL", "CO", "EC", "GF", "GY", "KN", 
+	"LC", "PE", "PY", "SR", "UY", "VE", "BZ", "CR", "GT", "HN", "NI", "PA", 
+    "SV", "AG", "AL", "AN", "AW", "BB", "BM", "BS", "DM", "DO", "GD", "GP", 
+    "HT", "JM", "KY", "MQ", "MS", "TC", "TT", "VC", "VG", "VI", 
+	"AS", "CK", "GU", "KH", "TL", "FJ", "PF", "LA", "MH", "FM", "MN", "NC", "PW",
+    "PG", "MP", "WS", "TO", "VU", "WF"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 4.20;
+}
+
+else if (["CN"].includes(request.OrgCountry)
+&& ["AR", "BO", "BR", "CL", "CO", "EC", "GF", "GY", "KN", 
+	"LC", "PE", "PY", "SR", "UY", "VE", "BZ", "CR", "GT", "HN", "NI", "PA", 
+    "SV", "AG", "AL", "AN", "AW", "BB", "BM", "BS", "DM", "DO", "GD", "GP", 
+    "HT", "JM", "KY", "MQ", "MS", "TC", "TT", "VC", "VG", "VI", 
+	"AS", "CK", "KH", "TL", "FJ", "PF", "LA", "MH", "FM", "MN", "NC", "PW",
+    "PG", "MP", "WS", "TO", "VU", "WF"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 4.20;
+}
+
+
+
+
+//NEW TW to SG need confirmation 
+
+
+else if (["KR", "PH", "VN", "TW"].includes(request.OrgCountry)
+&& ["SG"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 0.37;
+}
+
+// NEW need confirmation 
+
+
+else if (["MY"].includes(request.OrgCountry)
+&& ["SG"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 0.95;
+}
+
+// NEW need confirmation 
+
+
+else if (["SG"].includes(request.OrgCountry)
+&& ["MY"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) *  1.0;
+}
+
+
+// NEW need confirmation 
+
+
+else if (["PH"].includes(request.OrgCountry)
+&& ["US"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) *  1.0;
+}
+
+
+
+// NEW need confirmation 
+
+
+
+else if (["CN"].includes(request.OrgCountry)
+&& ["PH"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) *  1.0;
+}
+
+
+
+
+}
+
+//Some of the Origin/Destination below will be ignored since newer rates could have been already found above
+//From Oct 4th, 2021
+
+
+else if (request.IsShipDateAfter('2021-10-04') && request.IsShipDateBefore('2022-04-11'))
+{
+
+
+
+if (["JP", "KR", "TW"].includes(request.OrgCountry)
+&& ["US", "CA"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 2.00;
+}
+
+
+//NEW TW to SG need confirmation 
+
+
+else if (["KR", "PH", "VN", "TW"].includes(request.OrgCountry)
+&& ["SG"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 0.37;
+}
+
+// NEW need confirmation 
+
+
+else if (["MY"].includes(request.OrgCountry)
+&& ["SG"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 0.95;
+}
+
+// NEW need confirmation 
+
+
+else if (["SG"].includes(request.OrgCountry)
+&& ["MY"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) *  1.0;
+}
+
+
+// NEW need confirmation 
+
+
+else if (["PH"].includes(request.OrgCountry)
+&& ["US"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) *  1.0;
+}
+
+}
+
+//////
+//From Sept 13th, 2021
+
+else if (request.IsShipDateAfter('2021-09-13') && request.IsShipDateBefore('2021-10-04'))
+{
+
+
+if (["CN"].includes(request.OrgCountry)
+&& ["US", "CA", "MX", "AR", "BO", "BR", "CL", 
+    "CO", "EC", "GF", "GY", "KN", "LC", "PE", "PY", "SR", 
+    "UY", "VE", "BZ", "CR", "GT", "HN", "NI", "PA", "SV",
+    "AG", "AL", "AN", "AW", "BB", "BM", "BS", "DM", "DO", 
+    "GD", "GP", "HT", "JM", "KY", "MQ", "MS", "TC", "TT", 
+    "VC", "VG", "VI"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 4.20;
+}
+
+
+else if (["HK", "MO", "CN"].includes(request.OrgCountry)
+&& ["US", "CA", "MX", "PR"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 4.20;
+}
+
+
+else if (["CN"].includes(request.OrgCountry)
+&& ["GU"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 2.00;
+}
+
+
+else if (["TW"].includes(request.OrgCountry)
+&& ["US", "CA", "MX", "PR", "GU"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 2.00;
+}
+
+
+else if (["CN"].includes(request.OrgCountry)
+&& ["AU", "NZ", "BN", "GU", "KH", "LA"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 2.50;
+}
+
+
+else if (["HK"].includes(request.OrgCountry)
+&& ["AU", "NZ", "BN"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 2.50;
+}
+
+
+else if (["ID", "KR", "MY", "SG", "TH", "TW"].includes(request.OrgCountry)
+&& ["AU", "NZ"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 2.50;
+}
+
+
+else if (["ID", "MY", "SG", "TH", "AU", "PH", "VN"].includes(request.OrgCountry)
+&& ["US", "CA", "MX", "PR"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 2.50;
+}
+
+
+else if (["IN"].includes(request.OrgCountry)
+&& ["AU", "NZ", "MY", "KR"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 2.00;
+}
+
+
+else if (["PH", "VN"].includes(request.OrgCountry)
+&& ["AU", "NZ", "KH", "LA", "MN"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 2.50;
+}
+
+
+else if (["JP"].includes(request.OrgCountry)
+&& ["AU", "NZ", "GU", "BN", "AS", "KH", "CK", "TL",
+    "FJ", "PF", "LA", "MH", "FM", "MN", "NC", "PW",
+    "PG", "MP", "WS", "TO", "VU", "WF"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 2.50;
+}
+
+
+else if (["JP", "KR"].includes(request.OrgCountry)
+&& ["US", "CA", "MX", "PR"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 2.00;
+}
+
+
+else if (["NZ"].includes(request.OrgCountry)
+&& ["US", "CA", "MX", "PR", "AG", "AI", "AW", "BB",
+    "BQ", "BS", "CW", "DM", "DO", "GD", "GP", "HT",
+    "JM", "KN", "KY", "LC", "MF", "SX", "MQ", "MS",
+    "TC", "TT", "VC", "VG", "VI", "AS", "CK", "PF",
+    "TL", "TO", "WS"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 2.00;
+}
+
+
+else if (["AT", "BG", "CH", "CZ", "DE", "DK", "DZ", "EE", "EG", "EL", "ES", "FI", 
+    "FR", "HU", "IE", "IS", "IT", "JO", "LB", "LI", "LT", "LU", "LV", "LY", 
+    "MA", "MT", "MT", "NL", "NO", "PL", "PT", "RO", "RU", "SE", "SI", "SK", 
+    "SY", "TN", "XK", "BE"].includes(request.OrgCountry)
+&& ["US", "CA"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 0.86;
+}
+
+
+else if (["US"].includes(request.OrgCountry)
+&& ["AU", "GU", "ID", "MO", "CN", "MY", "NZ", "PH", "TH", "VN"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 2.20;
+}
+
+//Anywhere else from the US
+else if (["US"].includes(request.OrgCountry))
+{
+  Math.ceil(ourBilledWeight) * 0.77;
+}
+
+
+else if (["CA"].includes(request.OrgCountry))
+{
+  Math.ceil(ourBilledWeight) * 0.77;
+}
+
+
+else if (["AR", "BR", "CL", "CR", "EC"].includes(request.OrgCountry)
+&& !["AT", "BG", "CH", "CZ", "DE", "DK", "DZ", "EE", "EG", "EL", "ES", "FI", 
+    "FR", "HU", "IE", "IS", "IT", "JO", "LB", "LI", "LT", "LU", "LV", "LY", 
+    "MA", "MT", "MT", "NL", "NO", "PL", "PT", "RO", "RU", "SE", "SI", "SK", 
+    "SY", "TN", "XK", "BE"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 0.55;
+}
+
+
+else if (["UY"].includes(request.OrgCountry))
+{
+  Math.ceil(ourBilledWeight) * 0.55;
+}
+
+
+else if (["US", "CA", "MX"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 0.77;
+}
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+//From Feb 15th, 2021
+//Some of the Origin/Destination below will be ignored since newer rates should have been already found above
+
+else if (request.IsShipDateAfter('2021-02-15') && request.IsShipDateBefore('2021-09-13'))
+{
+
+
+if ((request.OrgCountry == "CN") 
+&& ["HK", "MO", "MY", "SG", "TH", "TW", "ID", "PH", "VN", "AS", "BN", 
+    "CK", "FJ", "FM", "KH", "KI", "LA", "MH", "MM", "MN", "MP", "NC", 
+    "NR", "NU", "PF", "PG", "PW", "SB", "TL", "TO", "TV", "VU", "WF", 
+    "WS", "JP", "KR"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 1.00;
+}
+
+
+else if ((request.OrgCountry == "CN") 
+&& !["AU", "NZ", "HK", "MO", "MY", "SG", "TH", "TW", "ID", "PH", "VN", "AS", "BN", 
+    "CK", "FJ", "FM", "KH", "KI", "LA", "MH", "MM", "MN", "MP", "NC", 
+    "NR", "NU", "PF", "PG", "PW", "SB", "TL", "TO", "TV", "VU", "WF", 
+    "WS", "JP", "KR"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 3.50;
+}
+
+
+else if (["MX", "AR", "BO", "BR", "CL", "CO", "EC", "GF", "GY", "KN", 
+        "LC", "PE", "PY", "SR", "UY", "VE", "BZ", "CR", "GT", "HN", "NI", "PA", 
+        "SV", "AG", "AL", "AN", "AW", "BB", "BM", "BS", "DM", "DO", "GD", "GP", 
+        "HT", "JM", "KY", "MQ", "MS", "TC", "TT", "VC", "VG", "VI"].includes(request.OrgCountry)
+&& ["AT", "BG", "CH", "CZ", "DE", "DK", "DZ", "EE", "EG", "EL", "ES", "FI", "FR", 
+    "HU", "IE", "IS", "IT", "JO", "LB", "LI", "LT", "LU", "LV", "LY", "MA", "MT", 
+    "MT", "NL", "NO", "PL", "PT", "RO", "RU", "SE", "SI", "SK", "SY", "TN", "XK", "BE"].includes(request.DestCountry))
+{
+  Math.ceil(ourBilledWeight) * 0.77;
+}
+
+
+
+// Everything else then Surcharge
+else
+{
+  Math.ceil(ourBilledWeight) * 0.22;
+}
+
+
+}

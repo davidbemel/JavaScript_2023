@@ -1,0 +1,236 @@
+
+// Update: Removed AU, NZ and PG from the Origin countries, since they have their own rates "AU", "NZ", "PG",
+// If Origin = China, Hong Kong, Rest of Asia & Destination = Australia, New Zealand and Papua New Guinea
+
+if (["CN", "HK", "BD" ,"BN", "BT", "CK", "FJ", "ID", "IN", "JP", "KH", "KI", "KR", "LA", "LK", "MM", "MV", "MY", "MN", "NC", "NP", "NR", "NU",
+    "KP", "PF", "PH", "PK", "SB", "SG", "TH", "TP", "TO", "TV", "TW", "VN", "VU", "WS"].includes(request.OrgCountry)
+&& ["AU", "NZ", "PG"].includes(request.DestCountry))
+{
+  request.BilledWeight * 2.80;
+} 
+
+// If Origin = Europe, Americas and Rest of World & Destination = Australia, New Zealand and Papua New Guinea
+else if (["AU", "NZ", "PG"].includes(request.DestCountry))
+{
+  request.BilledWeight * 2.35;
+}
+
+
+
+// If Origin = China, Hong Kong & Destination = Americas
+else if (["CN", "HK"].includes(request.OrgCountry) 
+&& ["US", "CA", "MX", "PR", "AR", "BO", "BR", "CL", 
+    "CO", "EC", "GF", "GY", "KN", "LC", "PE", "PY", "SR", 
+    "UY", "VE", "BZ", "CR", "GT", "HN", "NI", "PA", "SV",
+    "AG", "AL", "AN", "AW", "BB", "BM", "BS", "DM", "DO", 
+    "GD", "GP", "HT", "JM", "KY", "MQ", "MS", "TC", "TT", 
+    "VC", "VG", "VI"].includes(request.DestCountry))
+{
+  request.BilledWeight * 2.80;
+}
+
+
+
+// If Origin = China, Hong Kong & Destination = Europe
+else if (["CN", "HK"].includes(request.OrgCountry) 
+&& ["AT", "GB", "CH", "CZ", "DE", "DK", "DZ", "EE", "EG", "EL", "ES", "FI", 
+    "FR", "HU", "IE", "IS", "IT", "JO", "LB", "LI", "IL", "IL", "LT", "LU", "LV", "LY", 
+    "MA", "MT", "MT", "NL", "NO", "PL", "PT", "RO", "RU", "SE", "SI", "SK", 
+    "SY", "TN", "XK", "BE"].includes(request.DestCountry))
+{
+  request.BilledWeight * 1.70;
+}
+
+
+// If Origin = China, Hong Kong & Destination = Rest of Asia
+else if (["CN", "HK"].includes(request.OrgCountry) 
+&& ["BD" ,"BN", "BT", "CK", "FJ", "ID", "IN", "JP", "KH", "KI", "KR", "LA", "LK", "MM", "MV", "MY", "MN", "NC", "NP", "NR", "NU",
+    "KP", "PF", "PG", "PH", "PK", "SB", "SG", "TH", "TP", "TO", "TV", "TW", "VN", "VU", "WS", "AU", "NZ"].includes(request.DestCountry))
+{
+  request.BilledWeight * 1.00;
+}
+
+
+// If Origin = China, Hong Kong & Destination = China, Hong Kong
+else if (["CN", "HK"].includes(request.OrgCountry) 
+&& ["CN", "HK"].includes(request.DestCountry))
+{
+  request.BilledWeight * 1.00;
+}
+
+
+// If Origin = China, Hong Kong & Destination = Rest of the World
+else if (["CN", "HK"].includes(request.OrgCountry))
+{
+  request.BilledWeight * 1.70;
+}
+
+
+// If Origin = Rest of Asia & Destination = China, Hong Kong, Rest of Asia
+else if (["BN", "BT", "CK", "FJ", "ID", "JP", "KH", "KI", "KR", "LA", "MM", "MV", "MY", "MN", "NC", "NR", "NU",
+    "KP", "PF", "PG", "PH", "SB", "SG", "TH", "TP", "TO", "TV", "TW", "VN", "VU", "WS", "AU", "NZ"].includes(request.OrgCountry)
+&& ["CN", "HK", "BD" ,"BN", "BT", "CK", "FJ", "ID", "IN", "JP", "KH", "KI", "KR", "LA", "LK", "MM", "MV", "MY", "MN", "NC", "NP", "NR", "NU",
+    "KP", "PF", "PH", "PK", "SB", "SG", "TH", "TP", "TO", "TV", "TW", "VN", "VU", "WS"].includes(request.DestCountry))
+{
+   request.BilledWeight * 1.00;
+}
+
+
+// If Origin = Rest of Asia & Destination NOT = China, Hong Kong, Rest of Asia
+else if (["BN", "BT", "CK", "FJ", "ID", "JP", "KH", "KI", "KR", "LA", "MM", "MV", "MY", "MN", "NC", "NR", "NU",
+    "KP", "PF", "PG", "PH", "SB", "SG", "TH", "TP", "TO", "TV", "TW", "VN", "VU", "WS", "AU", "NZ"].includes(request.OrgCountry) 
+&& !["CN", "HK", "BD" ,"BN", "BT", "CK", "FJ", "ID", "IN", "JP", "KH", "KI", "KR", "LA", "MM", "MV", "MY", "MN", "NC", "NR", "NU",
+    "KP", "PF", "PH", "PK", "SB", "SG", "TH", "TP", "TO", "TV", "TW", "VN", "VU", "WS"].includes(request.DestCountry))
+{
+  request.BilledWeight * 1.40;
+  
+}
+
+
+// If Origin = South of Asia & Destination NOT = New Zeland group
+else if (["IN", "PK", "BD" , "LK", "NP"].includes(request.OrgCountry)
+&& !["AU", "NZ", "PG"].includes(request.DestCountry))
+{                   
+  request.BilledWeight * 1.00;
+  
+}
+
+// If Origin = EU  & Destination = Americas     
+else if (["AT", "GB", "CH", "CZ", "DE", "DK", "DZ", "EE", "EG", "EL", "ES", "FI", 
+    "FR", "HU", "IE", "IS", "IT", "JO", "LB", "LI", "IL", "IL", "LT", "LU", "LV", "LY", 
+    "MA", "MT", "MT", "NL", "NO", "PL", "PT", "RO", "RU", "SE", "SI", "SK", 
+    "SY", "TN", "XK", "BE"].includes(request.OrgCountry) 
+&& ["US", "CA", "MX", "PR", "AR", "BO", "BR", "CL", 
+    "CO", "EC", "GF", "GY", "KN", "LC", "PE", "PY", "SR", 
+    "UY", "VE", "BZ", "CR", "GT", "HN", "NI", "PA", "SV",
+    "AG", "AL", "AN", "AW", "BB", "BM", "BS", "DM", "DO", 
+    "GD", "GP", "HT", "JM", "KY", "MQ", "MS", "TC", "TT", 
+    "VC", "VG", "VI"].includes(request.DestCountry))
+{
+  request.BilledWeight * 0.35;
+}
+// If Origin NOT = China, Hong Kong, Rest of Asia & Destination = Any
+else
+
+{
+  request.BilledWeight * 0.2;
+}
+
+------------------
+
+// Update: Removed AU, NZ and PG from the Origin countries, since they have their own rates "AU", "NZ", "PG",
+// If Origin = China, Hong Kong, Rest of Asia & Destination = Australia, New Zealand and Papua New Guinea
+
+if (["CN", "HK", "BD" ,"BN", "BT", "CK", "FJ", "ID", "IN", "JP", "KH", "KI", "KR", "LA", "LK", "MM", "MV", "MY", "MN", "NC", "NP", "NR", "NU",
+    "KP", "PF", "PH", "PK", "SB", "SG", "TH", "TP", "TO", "TV", "TW", "VN", "VU", "WS"].includes(request.OrgCountry)
+&& ["AU", "NZ", "PG"].includes(request.DestCountry))
+{
+  request.BilledWeight * 1.30;
+} 
+
+// If Origin = Europe, Americas and Rest of World & Destination = Australia, New Zealand and Papua New Guinea
+else if (["AU", "NZ", "PG"].includes(request.DestCountry))
+{
+  request.BilledWeight * 1.10;
+}
+
+
+
+// If Origin = China, Hong Kong & Destination = Americas
+else if (["CN", "HK"].includes(request.OrgCountry) 
+&& ["US", "CA", "MX", "PR", "AR", "BO", "BR", "CL", 
+    "CO", "EC", "GF", "GY", "KN", "LC", "PE", "PY", "SR", 
+    "UY", "VE", "BZ", "CR", "GT", "HN", "NI", "PA", "SV",
+    "AG", "AL", "AN", "AW", "BB", "BM", "BS", "DM", "DO", 
+    "GD", "GP", "HT", "JM", "KY", "MQ", "MS", "TC", "TT", 
+    "VC", "VG", "VI"].includes(request.DestCountry))
+{
+  request.BilledWeight * 1.30;
+}
+
+
+
+// If Origin = China, Hong Kong & Destination = Europe
+else if (["CN", "HK"].includes(request.OrgCountry) 
+&& ["AT", "GB", "CH", "CZ", "DE", "DK", "DZ", "EE", "EG", "EL", "ES", "FI", 
+    "FR", "HU", "IE", "IS", "IT", "JO", "LB", "LI", "IL", "IL", "LT", "LU", "LV", "LY", 
+    "MA", "MT", "MT", "NL", "NO", "PL", "PT", "RO", "RU", "SE", "SI", "SK", 
+    "SY", "TN", "XK", "BE"].includes(request.DestCountry))
+{
+  request.BilledWeight * 0.80;
+}
+
+
+// If Origin = China, Hong Kong & Destination = Rest of Asia
+else if (["CN", "HK"].includes(request.OrgCountry) 
+&& ["BD" ,"BN", "BT", "CK", "FJ", "ID", "IN", "JP", "KH", "KI", "KR", "LA", "LK", "MM", "MV", "MY", "MN", "NC", "NP", "NR", "NU",
+    "KP", "PF", "PG", "PH", "PK", "SB", "SG", "TH", "TP", "TO", "TV", "TW", "VN", "VU", "WS", "AU", "NZ"].includes(request.DestCountry))
+{
+  request.BilledWeight * 0.50;
+}
+
+
+// If Origin = China, Hong Kong & Destination = China, Hong Kong
+else if (["CN", "HK"].includes(request.OrgCountry) 
+&& ["CN", "HK"].includes(request.DestCountry))
+{
+  request.BilledWeight * 0.50;
+}
+
+
+// If Origin = China, Hong Kong & Destination = Rest of the World
+else if (["CN", "HK"].includes(request.OrgCountry))
+{
+  request.BilledWeight * 0.80;
+}
+
+
+// If Origin = Rest of Asia & Destination = China, Hong Kong, Rest of Asia
+else if (["BN", "BT", "CK", "FJ", "ID", "JP", "KH", "KI", "KR", "LA", "MM", "MV", "MY", "MN", "NC", "NR", "NU",
+    "KP", "PF", "PG", "PH", "SB", "SG", "TH", "TP", "TO", "TV", "TW", "VN", "VU", "WS", "AU", "NZ"].includes(request.OrgCountry)
+&& ["CN", "HK", "BD" ,"BN", "BT", "CK", "FJ", "ID", "IN", "JP", "KH", "KI", "KR", "LA", "LK", "MM", "MV", "MY", "MN", "NC", "NP", "NR", "NU",
+    "KP", "PF", "PH", "PK", "SB", "SG", "TH", "TP", "TO", "TV", "TW", "VN", "VU", "WS"].includes(request.DestCountry))
+{
+   request.BilledWeight * 0.50;
+}
+
+
+// If Origin = Rest of Asia & Destination NOT = China, Hong Kong, Rest of Asia
+else if (["BN", "BT", "CK", "FJ", "ID", "JP", "KH", "KI", "KR", "LA", "MM", "MV", "MY", "MN", "NC", "NR", "NU",
+    "KP", "PF", "PG", "PH", "SB", "SG", "TH", "TP", "TO", "TV", "TW", "VN", "VU", "WS", "AU", "NZ"].includes(request.OrgCountry) 
+&& !["CN", "HK", "BD" ,"BN", "BT", "CK", "FJ", "ID", "IN", "JP", "KH", "KI", "KR", "LA", "MM", "MV", "MY", "MN", "NC", "NR", "NU",
+    "KP", "PF", "PH", "PK", "SB", "SG", "TH", "TP", "TO", "TV", "TW", "VN", "VU", "WS"].includes(request.DestCountry))
+{
+  request.BilledWeight * 0.60;
+  
+}
+
+
+// If Origin = South of Asia & Destination NOT = New Zeland group
+else if (["IN", "PK", "BD" , "LK", "NP"].includes(request.OrgCountry)
+&& !["AU", "NZ", "PG"].includes(request.DestCountry))
+{                   
+  request.BilledWeight * 0.50;
+  
+}
+
+// If Origin = EU  & Destination = Americas     
+else if (["AT", "GB", "CH", "CZ", "DE", "DK", "DZ", "EE", "EG", "EL", "ES", "FI", 
+    "FR", "HU", "IE", "IS", "IT", "JO", "LB", "LI", "IL", "IL", "LT", "LU", "LV", "LY", 
+    "MA", "MT", "MT", "NL", "NO", "PL", "PT", "RO", "RU", "SE", "SI", "SK", 
+    "SY", "TN", "XK", "BE"].includes(request.OrgCountry) 
+&& ["US", "CA", "MX", "PR", "AR", "BO", "BR", "CL", 
+    "CO", "EC", "GF", "GY", "KN", "LC", "PE", "PY", "SR", 
+    "UY", "VE", "BZ", "CR", "GT", "HN", "NI", "PA", "SV",
+    "AG", "AL", "AN", "AW", "BB", "BM", "BS", "DM", "DO", 
+    "GD", "GP", "HT", "JM", "KY", "MQ", "MS", "TC", "TT", 
+    "VC", "VG", "VI"].includes(request.DestCountry))
+{
+  request.BilledWeight * 0.2;
+}
+// If Origin NOT = China, Hong Kong, Rest of Asia & Destination = Any
+else
+
+{
+  request.BilledWeight * 0.1;
+}
